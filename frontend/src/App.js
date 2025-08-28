@@ -70,8 +70,8 @@ function App() {
     fetchMobVotes().then(setMobVotesData);
 
     // Socket.IO event listeners for real-time updates
-    socket.on("chatUpdate", (messages) => {
-      setChatMessages(messages);
+    socket.on("chatMessage", (message) => {
+      setChatMessages((prev) => [...prev, message]);
     });
 
     socket.on("itemUpdate", (items) => {
@@ -84,10 +84,11 @@ function App() {
 
     // Cleanup on unmount
     return () => {
-      socket.off("chatUpdate");
+      socket.off("chatMessage");
       socket.off("itemUpdate");
       socket.off("mobVotesUpdate");
     };
+
   }, []);
   useEffect(() => {
     const load = () => fetchStats().then(setStats);

@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
   console.log('🔌 Client connected to Socket.IO');
   
   // Send initial data
-  socket.emit('chatUpdate', chatLog.slice(-50));
+  //socket.emit('chatUpdate', chatLog.slice(-50));
   socket.emit('itemUpdate', itemLog.slice(-20));
   socket.emit('mobVotesUpdate', mobVotes);
   
@@ -179,7 +179,7 @@ function listenToChat(auth, liveChatId) {
 
         // ───> Push into chat log and emit update
         chatLog.push({ user, text, time });
-        io.emit('chatUpdate', chatLog.slice(-50));
+        //io.emit('chatUpdate', chatLog.slice(-50));
 
         handleChatMessage(text);
       });
@@ -210,7 +210,7 @@ function handleChatMessage(text) {
     if (rx.test(lowerText)) {
       sendCommand(`/give @s ${itemMap[key]} 1`);
       itemLog.push({ item: itemMap[key], time: new Date().toLocaleTimeString() });
-      io.emit('itemUpdate', itemLog.slice(-20));
+      //io.emit('itemUpdate', itemLog.slice(-20));
     }
   });
 
@@ -244,11 +244,20 @@ if (USE_YOUTUBE) {
 
   rl.on('line', (input) => {
     const user = "TerminalUser";
-    const text = input;
+    const text = input.trim();
     const time = new Date().toLocaleTimeString();
-    chatLog.push({ user, text, time });
-    handleChatMessage(input);
+
+    if (!text) return;
+
+    const message = { user, text, time };
+
+    chatLog.push(message);
+    io.emit('chatMessage', message); // ✅ Keep this
+
+    handleChatMessage(text);         // ✅ Keep this
   });
+
+
 }
 
 console.log('📡 YouTube & WS listeners running (WS on 3000)');
