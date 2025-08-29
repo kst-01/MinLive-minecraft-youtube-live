@@ -16,7 +16,7 @@ const mobVotes        = {};
 const chatLog         = [];    // ← store recent chat messages
 const itemLog         = [];    // ← store recent item gives
 
-const USE_YOUTUBE = false; // Set to true to enable YouTube integration
+const USE_YOUTUBE = true; // Set to true to enable YouTube integration
 
 // ─── MONGODB SETUP (optional) ────────────────────────────────────
 // mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/minlive', {
@@ -180,6 +180,7 @@ function listenToChat(auth, liveChatId) {
         // ───> Push into chat log and emit update
         chatLog.push({ user, text, time });
         //io.emit('chatUpdate', chatLog.slice(-50));
+        io.emit('chatMessage', { user, text, time }); // ✅ Real-time push for frontend
 
         handleChatMessage(text);
       });
