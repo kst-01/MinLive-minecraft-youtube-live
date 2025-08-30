@@ -122,7 +122,6 @@ function App() {
   function MainContent() {
     return (
       <main className="main-layout">
-      <head><title>MinLive</title></head>
         <div className="box large-box">
           <h2 className="box-title">Live Chat :</h2>
           <div className="inner-box">
