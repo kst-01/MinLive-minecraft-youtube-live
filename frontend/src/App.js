@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+import { io } from "socket.io-client"; 
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { toggleGamemode, toggleTime, sendChatMessage, sendConsoleCommand, fetchChatLog, fetchItemLog, fetchMobVotes, fetchStats } from "./integrat";
 import "./App.css";
