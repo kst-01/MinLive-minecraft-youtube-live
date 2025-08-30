@@ -16,9 +16,9 @@ const mobVotes        = {};
 const chatLog         = [];    // ← store recent chat messages
 const itemLog         = [];    // ← store recent item gives
 
-const USE_YOUTUBE = true; // Set to true to enable YouTube integration
+const USE_YOUTUBE = false; // Set to true to enable YouTube integration
 
-// ─── MONGODB SETUP (optional) ────────────────────────────────────
+// ─── MONGODB SETUP (future option) ────────────────────────────────────
 // mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/minlive', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
